@@ -1,0 +1,190 @@
+<html lang="pt-BR">
+
+<head>
+
+    <title>Simulador Sero</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-language" content="pt-br">
+    <meta name="description" content="">
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<body class="scroll" data-aos-easing="ease" data-aos-duration="1500" data-aos-delay="0" cz-shortcut-listen="true">
+
+
+    <div class="row">
+        <div class="col-lg-6 form-group">
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <label for="nome">Seu Nome *</label>
+                    <input id="nome" type="text" name="nome" class="form-control">
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label for="celular">Celular *</label>
+                    <input id="celular" type="text" name="celular" data-maska="(##) #####-####" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label for="tipo_pessoa">Tipo de Pessoa *</label>
+                    <select id="tipo_pessoa" class="form-select">
+                        <option value="Física">Física</option>
+                        <option value="Jurídica">Jurídica</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <label for="area_afericao">Área de Aferição (metros) *</label>
+                    <input type="text" name="area_afericao" id="area_afericao" data-maska="######" class="form-control">
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label for="categoria_obra">Categoria da Obra *</label>
+                    <select id="categoria_obra" class="form-select">
+                        <option value="Obra Nova">Obra Nova</option>
+                        <option value="Acréscimo">Acréscimo</option>
+                        <option value="Reforma">Reforma</option>
+                        <option value="Demolição">Demolição</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <label for="destinacao">Destinação *</label>
+                    <select id="destinacao" class="form-select">
+                        <option value="Residencial Unifamiliar">Residencial Unifamiliar</option>
+                        <option value="Residencial Multifamiliar">Residencial Multifamiliar</option>
+                        <option value="Comercial Salas e Lojas">Comercial Salas e Lojas</option>
+                        <option value="Edifício de Garagens">Edifício de Garagens</option>
+                        <option value="Galpão Industrial">Galpão Industrial</option>
+                        <option value="Casa Popular">Casa Popular</option>
+                        <option value="Conjunto Habitacional Popular">Conjunto Habitacional Popular
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label for="tipo_de_obra">Tipo de Obra *</label>
+                    <select id="tipo_de_obra" class="form-select">
+                        <option value="Alvenaria">Alvenaria</option>
+                        <option value="Madeira">Madeira</option>
+                        <option value="Mista">Mista</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <label for="material_usinado">Material Usinado *</label>
+                    <select id="material_usinado" class="form-select">
+                        <option value="0">Não</option>
+                        <option value="1">Sim</option>
+                    </select>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label for="uf">Estado *</label>
+                    <select id="uf" class="form-select">
+                        <option value="SP">São Paulo</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button onclick="calcular()"> Simular </button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        async function calcular() {
+
+            const tipo_pessoa = document.getElementById('tipo_pessoa').value;
+            const area_afericao = document.getElementById('area_afericao').value;
+            const categoria_obra = document.getElementById('categoria_obra').value;
+            const destinacao = document.getElementById('destinacao').value;
+            const tipo_de_obra = document.getElementById('tipo_de_obra').value;
+            const material_usinado = document.getElementById('material_usinado').value;
+            const uf = document.getElementById('uf').value;
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "nome": "teste",
+                    "celular": "(88) 88888-8888",
+                    "email": "teste@email.com",
+                    "tipo_pessoa": tipo_pessoa,
+                    "area_afericao": area_afericao,
+                    "vau": "",
+                    "categoria_obra": categoria_obra,
+                    "destinacao": destinacao,
+                    "tipo_de_obra": tipo_de_obra,
+                    "material_usinado": material_usinado,
+                    "uf": uf,
+                    "cnae": 0,
+                    "simples_nacional": 0,
+                    "checkread": true
+                }),
+            };
+
+            // const resposta = await fetch("https://www.simuladordesero.com.br/wp-json/simulador-de-sero/calcular", options);
+            // const dados = await resposta.json()
+            // if (resposta.ok) {
+            //     console.log(dados.result)
+            // }
+
+            const nova = await fetch("https://www.simuladordesero.com.br/simulados/teste-88-88888-8888-12", {
+                method: "GET", mode: "cors", headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            });
+
+            const d = await nova.text()
+            console.log(d)
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>
