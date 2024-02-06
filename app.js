@@ -19,8 +19,16 @@ app.use(cors())
 
 app.post("/", async (req, res) => {
 
-    res.send(await scrapePage(req.body.url))
+    try {
+       const resposta =  await scrapePage(req.body.url)
+       res.send(resposta)
+    } catch (error) {
+        res.send(error)
+    }
+ 
 });
 
-app.listen(8080)
+app.listen(8080, () => {
+    console.log("rodando na porta 8080")
+})
 
