@@ -17,8 +17,8 @@ async function scrapePage(url) {
 app.use(json())
 app.use(cors())
 
-app.get("/", async (req, res) => {
-    
+app.post("/", async (req, res) => {
+
     res.send(await scrapePage(req.body.url))
 });
 
