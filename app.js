@@ -21,6 +21,7 @@ app.post("/", async (req, res) => {
 
     try {
        const resposta =  await scrapePage(req.body.url)
+       console.log(resposta)
        res.send(resposta)
     } catch (error) {
         res.send(error)
