@@ -131,6 +131,30 @@
 
     <script>
 
+        function extrairDadosDoHTML(htmlText) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+
+            const h3Elements = doc.querySelectorAll('h3');
+            const dados = [];
+
+            for (let i = 0; i < Math.min(h3Elements.length, 6); i++) {
+                const h3 = h3Elements[i];
+                const titulo = h3.textContent.trim();
+                const ulElement = h3.nextElementSibling;
+
+                if (ulElement && ulElement.tagName.toLowerCase() === 'ul') {
+                    const liElements = ulElement.querySelectorAll('li');
+                    const opcoes = Array.from(liElements).map(li => li.textContent.trim());
+                    dados.push({ titulo, opcoes });
+                } else {
+                    dados.push({ titulo, opcoes: [] }); // Se não houver ul, adicione um objeto vazio
+                }
+            }
+
+            console.log(dados);
+        }
+
 
         async function calcular() {
 
@@ -165,20 +189,22 @@
                 }),
             };
 
-            // const resposta = await fetch("https://www.simuladordesero.com.br/wp-json/simulador-de-sero/calcular", options);
-            // const dados = await resposta.json()
-            // if (resposta.ok) {
-            //     console.log(dados.result)
-            // }
+            const resposta = await fetch("https://www.simuladordesero.com.br/wp-json/simulador-de-sero/calcular", options);
+            const dados = await resposta.json()
+            if (resposta.ok) {
+                console.log(dados.result)
+            }
 
-            const nova = await fetch("https://www.simuladordesero.com.br/simulados/teste-88-88888-8888-12", {
-                method: "GET", mode: "cors", headers: {
-                    "Access-Control-Allow-Origin": "*"
-                }
+            const nova = await fetch("http://localhost:8080", {
+                method: "POST", headers: {
+                    'Content-Type': 'application/json',
+                }, body: JSON.stringify({ url: dados.link })
             });
 
             const d = await nova.text()
-            console.log(d)
+
+
+            extrairDadosDoHTML(d)
 
 
         }
